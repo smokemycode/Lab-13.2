@@ -1,4 +1,4 @@
-# Digital Bookshelf API (Lab 2: Mongoose Models & Schemas)
+# Digital Bookshelf API (Mongoose Models & Schemas)
 
 A REST API for a library to add, list, look up, edit, and remove books.
 Built with Node.js, Express, Mongoose, and MongoDB Atlas (ES modules).
