@@ -28,6 +28,7 @@ router.post('/', async (req, res) => {
     }
 });
 
+// Define a route to get a single book by its ID from the database
 router.get('/:id', async (req, res) => {
     try {
         // Fetch a single book by its ID from the database
@@ -38,6 +39,24 @@ router.get('/:id', async (req, res) => {
     } catch (error) {
         // Handle any errors that occur during the database query
         res.status(500).json({ message: error.message });
+    }
+});
+
+// Define a route to update a book by its ID in the database
+router.put('/:id', async (req, res) => {
+    try {
+        // Update a book by its ID in the database using the request body
+        const updatedBook = await Book.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            { returnDocument: 'after', runValidators: true } // Return the updated document
+        );
+        // If the book is not found, return a 404 error
+        if (!updatedBook) return res.status(404).json({ message: 'Book not found' });
+        res.json(updatedBook);
+    } catch (error) {
+        // Handle any errors that occur during the database query
+        res.status(400).json({ message: error.message });
     }
 });
 
