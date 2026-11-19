@@ -60,4 +60,17 @@ router.put('/:id', async (req, res) => {
     }
 });
 
+// Define a route to delete a book by its ID from the database
+router.delete('/:id', async (req, res) => {
+    try {
+        // Delete a book by its ID from the database
+        const deletedBook = await Book.findByIdAndDelete(req.params.id);
+        // If the book is not found, return a 404 error
+        if (!deletedBook) return res.status(404).json({ message: 'Book not found' });
+        res.json({ message: 'Book deleted successfully' }); // Return a success message upon successful deletion
+    } catch (error) {
+        res.status(500).json({ message: error.message }); // Handle any errors that occur during the database query
+    }
+});
+
 export default router;
