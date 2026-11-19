@@ -16,4 +16,14 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.post('/', async (req, res) => {
+    try {
+        // Create a new book in the database using the request body
+        const newBook = await Book.create(req.body);
+        res.status(201).json(newBook);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+});
+
 export default router;
